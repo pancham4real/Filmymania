@@ -1,47 +1,36 @@
 import "./App.css";
 import React, { useState } from "react";
+import Header from "./components/Header";
+import Cards from "./components/Cards";
+import { Routes, Route } from "react-router-dom";
+import Addmovie from "./components/Addmovie";
+import Detail from "./components/Detail";
+import { createContext } from "react";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+
+const Appstate = createContext();
 
 function App() {
-  const [num1, setNum1] = useState();
-  const [num2, setNum2] = useState();
-  const [result, setResult] = useState();
-
-  const handlenum1change = (e) => {
-    setNum1(e.target.value);
-  };
-
-  const handlenum2change = (e) => {
-    setNum2(e.target.value);
-  };
-
-  const Displayresult = () => {
-    const resultvalue = parseFloat(num1) + parseFloat(num2);
-    setResult(resultvalue);
-    setNum1("");
-    setNum2("");
-  };
+  const [login, setLogin] = useState(false);
+  const [name, setName] = useState("");
 
   return (
-    <div className="App">
-      <input
-        type="number"
-        placeholder="Enter first number"
-        value={num1}
-        onChange={handlenum1change}
-      />
-
-      <input
-        type="number"
-        placeholder="Enter second number"
-        value={num2}
-        onChange={handlenum2change}
-      />
-      <button className="btn" onClick={Displayresult}>
-        Display Result
-      </button>
-      <input type="text" placeholder="Result" value={result} readOnly />
-    </div>
+    <Appstate.Provider value={{ login, setLogin, name, setName }}>
+      <div className="App relative">
+        {/* <h1 className="text-blue-500 text-lg ">Filmyverse</h1> */}
+        <Header />
+        <Routes>
+          <Route path="/" element={<Cards />} />
+          <Route path="/addmovie" element={<Addmovie />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </div>
+    </Appstate.Provider>
   );
 }
 
 export default App;
+export { Appstate };
