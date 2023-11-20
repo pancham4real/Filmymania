@@ -39,20 +39,19 @@ const Login = () => {
         doc?._document?.data?.value?.mapValue?.fields?.form?.mapValue?.fields;
       console.log(data, "_data===>");
 
-      isUser = bcrypt.compareSync(
+      const comparePass = bcrypt.compareSync(
         form?.password,
         data?.password?.stringValue ||
           data?.form?.mapValue?.fields.password?.stringValue
       );
       console.log(isUser, "isUser");
-
-      if (
-        form?.password === data?.password?.stringValue ||
-        data?.form?.mapValue?.fields.password?.stringValue
-      )
+      if (comparePass) {
         isUser = true;
-      useAppState.setName(data.name);
+        useAppState.setName(data.name);
+      }
     });
+    console.log(isUser, "isUser");
+
     if (isUser) {
       useAppState.setLogin(true);
 
