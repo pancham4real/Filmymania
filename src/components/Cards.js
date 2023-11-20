@@ -33,7 +33,7 @@ const Cards = () => {
           <Link to={`/detail/${e.id}`}>
             <div
               key={i}
-              className="card  text-lg font-bold shadow-lg p-4 hover:-translate-y-4 cursor-pointer mt-6 transition-all duration-500"
+              className="card text-lg font-bold shadow-lg p-4 hover:-translate-y-4 cursor-pointer mt-6 transition-all duration-500"
             >
               <img className="h-90" src={e.image} alt="" />
               <h1>{e.Title}</h1>
